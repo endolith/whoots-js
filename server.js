@@ -1,6 +1,11 @@
 'use strict';
 
-var WhooTS = require('./');
+let WhooTS;
+
+import('./index.mjs').then(module => {
+  WhooTS = module;
+});
+
 var http = require('http');
 var url = require('url');
 
