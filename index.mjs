@@ -10,7 +10,7 @@ export { getURL, getTileBBox, getMercCoords };
  * @param    {Number}  y        Tile coordinate y
  * @param    {Number}  z        Tile zoom
  * @param    {Object}  [options]
- * @param    {String}  [options.format='image/png']
+ * @param    {String}  [options.format='image/jpeg']
  * @param    {String}  [options.service='WMS']
  * @param    {String}  [options.version='1.1.1']
  * @param    {String}  [options.request='GetMap']
@@ -28,7 +28,7 @@ function getURL(baseUrl, layer, x, y, z, options) {
 
     var url = baseUrl + '?' + [
         'bbox='    + getTileBBox(x, y, z),
-        'format='  + (options.format || 'image/png'),
+        'format='  + (options.format || 'image/jpeg'),
         'service=' + (options.service || 'WMS'),
         'version=' + (options.version || '1.1.1'),
         'request=' + (options.request || 'GetMap'),
