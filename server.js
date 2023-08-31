@@ -26,8 +26,16 @@ function handleRequest(request, response) {
             baseUrl = pathname.replace(params.slice(0,6).join('/') + '/', '');
 
         if (!isNaN(z) && !isNaN(x) && !isNaN(y) && layer && url.parse(baseUrl).protocol) {
-            response.writeHead(302, { 'Location': WhooTS.getURL(baseUrl, layer, x, y, z) });
-            response.end('Redirect');
+            var wmsUrl = WhooTS.getURL(baseUrl, layer, x, y, z);
+
+            https.get(wmsUrl, (res) => {
+                res.pipe(response);
+            }).on('error', (e) => {
+                console.error(`Got error: ${e.message}`);
+                response.statusCode = 500;
+                response.end('Internal Server Error');
+            });
+
             return;
         }
     }
